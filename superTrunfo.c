@@ -2,7 +2,10 @@
 #include <string.h> // usado para remover o '\n' quando usamos fgets
 
 // Desafio Super Trunfo - Países
-// Tema 2 - Desenvolvimento da Lógica do Jogo
+// Tema 1 - Cadastro das Cartas
+// Este código inicial serve como base para o desenvolvimento do sistema de cadastro de cartas de cidades.
+// Siga os comentários para implementar cada parte do desafio.
+//Teste larissa
 
 // Definição das variáveis usadas para guardar informação
 struct Carta {
@@ -15,7 +18,7 @@ struct Carta {
     int pontosTuristicos;
     float superPoder; // variável extra para o super poder da carta
     double densidade;     // população / área
-    double pibPerCapita;  // pib / população
+    double pibPerCapita;  // pib  / população
 };
 
 int main() {
@@ -96,7 +99,7 @@ int main() {
 
     printf("\n");
     // Exibição dos Dados das Cartas, um por linha:
-    printf("CARTAS CADASTRADAS ===============================================\n");
+    printf("CARTAS CADASTRADAS ===============================================\n\n");
 
     // Exibição da Carta 1
     printf("=========== Carta 1\n");
@@ -121,22 +124,88 @@ int main() {
     printf("PIB: %.2f bilhões de reais\n", carta2.pib);
     printf("Pontos Turísticos: %d\n", carta2.pontosTuristicos);
     printf("Densidade Populacional: %.2f habitantes/km2\n", carta2.densidade);
-    printf("PIB per capita: %.2f reais\n\n", carta2.pibPerCapita);
+    printf("PIB per capita: %.2f reais\n", carta2.pibPerCapita);
 
+    // Escolha de dois atributos para comparação
+    printf("ESCOLHA DOIS ATRIBUTOS PARA COMPARAÇÃO ===============================================\n");
+    printf("1. População\n");
+    printf("2. Área\n");
+    printf("3. PIB per capita\n");
+    printf("4. Pontos Turísticos\n");
+    printf("5. Densidade Populacional\n");
 
-    printf("\nCOMPARAÇÃO DE ATRIBUTOS ===============================================\n");
+    printf("Insira um atributo para comparação: ");
+    scanf(" %d", &comparacao); // lê a escolha do primeiro atributo
 
-            // Comparação de População
+    if (comparacao < 1 || comparacao > 5) { // validação se o número inserio é válido
+        printf("Número inválido! Digite um valor entre 1 e 5: ");
+        scanf("%d", &comparacao);
+    }
+     if (comparacao < 1 || comparacao > 5) {
+            atributos = 0; // se o usuário errou duas vezes, atributo é dado como inválido
+        }
+
+    printf("COMPARAÇÃO DE ATRIBUTOS ===============================================\n");
+
+    if (atributos) {
+
+        // se os atributos forem válidos
+        if (comparacao == 1) { // População
             printf("Atributo: População\n");
-            printf("Carta 1 - %s: %d habitantes\n", carta1.cidade, carta1.populacao);
-            printf("Carta 2 - %s: %d habitantes\n", carta2.cidade, carta2.populacao);
+            printf("Carta 1 - %s: %d\n", carta1.cidade, carta1.populacao);
+            printf("Carta 2 - %s: %d\n", carta2.cidade, carta2.populacao);
             printf("=========== Resultado\n");
+                //  laço de comparação
+                if (carta1.populacao > carta2.populacao) printf("Carta 1 venceu!\n"); 
+                else if (carta2.populacao > carta1.populacao) printf("Carta 2 venceu!\n");
+                else printf("Empate!\n");
+        }
 
-            if (carta1.populacao > carta2.populacao) printf("Carta 1 venceu!\n"); 
-    
-            else if (carta2.populacao > carta1.populacao) printf("Carta 2 venceu!\n");
+        else if (comparacao == 2) { // Área
+            printf("Atributo: Área\n");
+            printf("Carta 1 - %s: %.2f km²\n", carta1.cidade, carta1.area);
+            printf("Carta 2 - %s: %.2f km²\n", carta2.cidade, carta2.area);
+            printf("=========== Resultado\n");
+                if (carta1.area > carta2.area) printf("Carta 1 venceu!\n");
+                else if (carta2.area > carta1.area) printf("Carta 2 venceu!\n");
+                else printf("Empate!\n");
+        }
+        
+        else if (comparacao == 3) { // PIB per capita
+            printf("Atributo: PIB per capita\n");
+            printf("Carta 1 - %s: %.2f\n", carta1.cidade, carta1.pibPerCapita);
+            printf("Carta 2 - %s: %.2f\n", carta2.cidade, carta2.pibPerCapita);
+            printf("=========== Resultado\n");
+                if (carta1.pibPerCapita > carta2.pibPerCapita) printf("Carta 1 venceu!\n");
+                else if (carta2.pibPerCapita > carta1.pibPerCapita) printf("Carta 2 venceu!\n");
+                else printf("Empate!\n");
+        }
 
-            else printf("Empate!\n");
-    
+        else if (comparacao == 4) { // Pontos Turísticos
+            printf("Atributo: Pontos Turísticos\n");
+            printf("Carta 1 - %s: %d pontos\n", carta1.cidade, carta1.pontosTuristicos);
+            printf("Carta 2 - %s: %d pontos\n", carta2.cidade, carta2.pontosTuristicos);
+            printf("=========== Resultado\n");
+                if (carta1.pontosTuristicos > carta2.pontosTuristicos) printf("Carta 1 venceu!\n");
+                else if (carta2.pontosTuristicos > carta1.pontosTuristicos) printf("Carta 2 venceu!\n");
+                else printf("Empate!\n");
+        }
+
+        else if (comparacao == 5) { // Densidade Populacional
+            printf("Atributo: Densidade Populacional\n");
+            printf("Carta 1 - %s: %.2f hab/km²\n", carta1.cidade, carta1.densidade);
+            printf("Carta 2 - %s: %.2f hab/km²\n", carta2.cidade, carta2.densidade);
+            printf("=========== Resultado\n");
+                if (carta1.densidade < carta2.densidade) printf("Carta 1 venceu!\n"); // menor vence
+                else if (carta2.densidade < carta1.densidade) printf("Carta 2 venceu!\n");
+                else printf("Empate!\n");
+        }
+
+    } else { // se o atributo for inválido
+        printf("Atributo: Inválido\n");
+        printf("=========== Resultado\n");
+        printf("Foi escolhida uma opção Inválida. É impossível realizar a comparação.\n");
+    }
+
     return 0;
 }
